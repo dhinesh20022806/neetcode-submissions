@@ -1,0 +1,23 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        
+        memo = {len(s): True}
+
+
+        def dfs(i):
+
+
+            if i == len(s):
+                return True
+            
+            if i in memo:
+                return True
+
+            for w in wordDict:
+                if ((i + len(w)) <= len(s) and s[i : i + len(w)] == w):
+                    if dfs(i + len(w)):
+                        memo[i] = True
+                        return True
+
+            return False
+        return dfs(0)
